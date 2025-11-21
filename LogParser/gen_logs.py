@@ -19,6 +19,11 @@ def gen_random_logs(file):
                 ip_set.add(ip_addr)
                 break
         workstation[name] = ip_addr
+    with open(file, "w") as f:
+        for _ in range(max_count):
+            name = random.choice(names)
+
+            f.write(f"")
 
     print(workstation)
 
