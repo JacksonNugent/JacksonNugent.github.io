@@ -1,0 +1,6 @@
+import os
+
+file = 'logs.txt'
+
+def parse_logs(file):
+    pass

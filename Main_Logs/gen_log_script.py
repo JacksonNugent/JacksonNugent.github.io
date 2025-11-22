@@ -1,17 +1,25 @@
-import random, datetime
+import random, datetime, os
+
+
 
 workstation = {} # Name = Key; IP = Value
 names = {'James', 'Dean', 'Alice', 'Doe'}
+events = {'LOGON', 'LOGON_FAILED', 'LOGOFF', 'FILE_ACCESS'}
 ips = set()
 log_file = 'logs.txt'
 max_count = 100
 
+
+def clear_console():
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
+
 def main():
     input('Press enter to continue...')
+    clear_console()
     gen_ips()
-    assign_ips()
-    for user, ip in workstation.items():
-        print(f'{user} has {ip}')
     gen_logs(log_file)
   
   
@@ -33,18 +41,20 @@ def gen_logs(file):
     
     with open(file, 'w') as f:
         for ts in timestamps:
-            f.write(f'{ts}\n')
+            name = random.choice(list(names))
+            ip = workstation[name]
+            event = random.choice(list(events))
+            f.write(f'{ts}, {name}, {ip}: {event}\n')
 
 # Generate IPs and add to ips set to choose
 def gen_ips():
     for i in range(2, 15):
         ips.add('10.1.1.' + str(i))
-
-
-# Assign users to workstation dictionary with a value of ip randomly chosen from ips
-def assign_ips():
     for name in names:
-        workstation[name] = random.choice(list(ips))
+        workstation[name] = random.choice(list(ips)) 
 
 
-main()
+    
+
+
+if __name__ == '__main__':    main()
