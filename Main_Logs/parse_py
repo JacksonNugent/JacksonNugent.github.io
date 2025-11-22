@@ -35,10 +35,31 @@ def parse_logs(file):
                     file_access[user] = file_access.get(user, 0) + 1
     
     sorted_failed = dict(sorted(failed_logins.items(), key=lambda x: x[1], reverse=True))
+    sorted_success = dict(sorted(successful_logins.items(), key=lambda x: x[1], reverse=True))
+    sorted_file = dict(sorted(file_access.items(), key=lambda x: x[1], reverse=True))
+    sorted_logoff = dict(sorted(logoff.items(), key=lambda x: x[1], reverse=True))
+    
+    flagged_level = 5
+    flagged_users = []
+    
+    for user in failed_logins:
+        if failed_logins[user] >= flagged_level:
+            flagged_users.append(user)
+            
+    for u in flagged_users:
+        print(f'{u} has had 5 or more failed logins. Flagged as suspicious!\n')
     
     for u, count in sorted_failed.items():
         print(f'{u} had {count} failed logins')
-                    
+    for u, count in sorted_success.items():
+        print(f'{u} had {count} successful logins')
+    for u, count in sorted_file.items():
+        print(f'{u} had {count} file accesses')
+    for u, count in sorted_logoff.items():
+        print(f'{u} had {count} logoffs')    
+
+    
+    
 
 
 parse_logs(file)
