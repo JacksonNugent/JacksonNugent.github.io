@@ -1,3 +1,12 @@
+""" 
+To do:
+Setup leaderboard of event counts
+Flag risky logins
+Set logon hours?
+
+"""
+
+
 import os
 
 file = 'logs.txt'
