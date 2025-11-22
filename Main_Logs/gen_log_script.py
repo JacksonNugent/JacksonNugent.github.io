@@ -44,7 +44,7 @@ def gen_logs(file):
             name = random.choice(list(names))
             ip = workstation[name]
             event = random.choice(list(events))
-            f.write(f'{ts}, {name}, {ip}: {event}\n')
+            f.write(f'{ts},{name},{ip},{event}\n')
 
 # Generate IPs and add to ips set to choose
 def gen_ips():
